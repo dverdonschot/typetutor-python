@@ -23,7 +23,7 @@ def traincharacters(characters: str = characterset, numberOffLetters: int = 100)
     training_chars = functions.charTrainingSet(numberOffLetters, list_chars)
     number_char = 0
     for i in training_chars:
-        print(terminal.cyan(i))
+        print(terminal.magenta(i))
 
         try:
             #while True:
