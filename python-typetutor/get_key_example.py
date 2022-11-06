@@ -6,6 +6,7 @@ def getkey():
     try:
         while True:
             b = os.read(sys.stdin.fileno(), 3).decode()
+            print(b)
             if len(b) == 3:
                 k = ord(b[2])
             else:
@@ -16,10 +17,6 @@ def getkey():
                 32: 'space',
                 9: 'tab',
                 27: 'esc',
-                65: 'up',
-                66: 'down',
-                67: 'right',
-                68: 'left'
             }
             return key_mapping.get(k, chr(k))
     finally:

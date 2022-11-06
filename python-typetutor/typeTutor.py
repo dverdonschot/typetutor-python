@@ -15,6 +15,7 @@ def traincharacters(characters: str = characterset, numberOffLetters: int = 100)
     You will get the characters randomized.
     """
     import functions
+    import terminal
 
     unique_characters = set(characters)
     list_chars = list(unique_characters)
@@ -22,21 +23,27 @@ def traincharacters(characters: str = characterset, numberOffLetters: int = 100)
     training_chars = functions.charTrainingSet(numberOffLetters, list_chars)
     number_char = 0
     for i in training_chars:
-        print(i)
+        print(terminal.cyan(i))
 
         try:
             #while True:
                 k = functions.getkey()
                 if k == 'esc':
+                    print(terminal.yellow('quiting'))
                     quit()
                 if k == i:
                     number_char = number_char + 1
-                    print (i + "= correct")
+                    print (terminal.green(i + "= correct"))
                     print(training_chars[:number_char])
-                if k != i:
+                elif k != i:
                     number_char = number_char + 1
-                    print(k + " = wrong")
-                    print(training_chars[:number_char])
+                    print(terminal.red(k + " = wrong should be " + i))
+                    k = functions.getkey()
+                    if k != i:
+                        print(terminal.red(k + " = still a fail should be " + i))
+                    if k == i:
+                        print (terminal.green(i + " = correct on second try"))
+                        print(training_chars[:number_char])
                     
         except (KeyboardInterrupt, SystemExit):
             os.system('stty sane')
