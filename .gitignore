@@ -34,4 +34,4 @@ build/**/*
 # ignore yarn.lock
 yarn.lock
 Footer
-
+alpha-prj/*
