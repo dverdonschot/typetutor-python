@@ -22,8 +22,8 @@ def traincharacters(characters: str = characterset, numberOffLetters: int = 100)
 
     training_chars = functions.charTrainingSetLib(numberOffLetters, list_chars)
     number_char = 0
-    for i in training_chars:
-        print(terminal.magenta(i))
+    for x, i in training_chars.items():
+        print(terminal.magenta(i["character"]))
 
         try:
             #while True:
@@ -31,19 +31,17 @@ def traincharacters(characters: str = characterset, numberOffLetters: int = 100)
                 if k == 'esc':
                     print(terminal.yellow('quiting'))
                     quit()
-                if k == i:
-                    number_char = number_char + 1
-                    print (terminal.green(i + "= correct"))
-                    print(training_chars[:number_char])
-                elif k != i:
-                    number_char = number_char + 1
-                    print(terminal.red(k + " = wrong should be " + i))
+                if k == i["character"]:
+                    print (terminal.green(i["character"] + "= correct"))
+                    print(training_chars[:(x + 1)])
+                elif k != i["character"]:
+                    print(terminal.red(k + " = wrong should be " + i["character"]))
                     k = functions.getkey()
-                    if k != i:
-                        print(terminal.red(k + " = still a fail should be " + i))
-                    if k == i:
-                        print (terminal.green(i + " = correct on second try"))
-                        print(training_chars[:number_char])
+                    if k != i["character"]:
+                        print(terminal.red(k + " = still a fail should be " + i["character"]))
+                    if k == i["character"]:
+                        print (terminal.green(i["character"] + " = correct on second try"))
+                        print(training_chars[:x + 1])
                     
         except (KeyboardInterrupt, SystemExit):
             os.system('stty sane')
