@@ -34,3 +34,9 @@ def charTrainingSet(number, characters):
         generated_charTrainingSet.append(random.choice(characters))
     return generated_charTrainingSet
 
+def charTrainingSetLib(number, characters):
+    """Create a list of characters that the user has to type as training"""
+    generated_charTrainingSetLib = {}
+    for i in range(number):
+        generated_charTrainingSetLib.update({i: {"character": random.choice(characters), "userinput": ""}})
+    return generated_charTrainingSetLib
