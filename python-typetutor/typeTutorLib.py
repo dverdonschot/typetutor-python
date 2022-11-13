@@ -21,9 +21,11 @@ def traincharacters(characters: str = characterset, numberOffLetters: int = 100)
     list_chars = list(unique_characters)
 
     training_chars = functions.charTrainingSetLib(numberOffLetters, list_chars)
-    number_char = 0
+    typed_chars = []
+
     for x, i in training_chars.items():
         print(terminal.magenta(i["character"]))
+        typed_chars.append(i["character"])
 
         try:
             #while True:
@@ -33,7 +35,7 @@ def traincharacters(characters: str = characterset, numberOffLetters: int = 100)
                     quit()
                 if k == i["character"]:
                     print (terminal.green(i["character"] + "= correct"))
-                    print(training_chars[:(x + 1)])
+                    print(typed_chars[:(x + 1)])
                 elif k != i["character"]:
                     print(terminal.red(k + " = wrong should be " + i["character"]))
                     k = functions.getkey()
@@ -41,7 +43,7 @@ def traincharacters(characters: str = characterset, numberOffLetters: int = 100)
                         print(terminal.red(k + " = still a fail should be " + i["character"]))
                     if k == i["character"]:
                         print (terminal.green(i["character"] + " = correct on second try"))
-                        print(training_chars[:x + 1])
+                        print(typed_chars[:x + 1])
                     
         except (KeyboardInterrupt, SystemExit):
             os.system('stty sane')
