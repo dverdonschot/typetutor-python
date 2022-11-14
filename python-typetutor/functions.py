@@ -1,5 +1,6 @@
 import random
 import sys,tty,os,termios
+import terminal
 
 def getkey():
     """get the user input from keyboard press"""
@@ -38,5 +39,24 @@ def charTrainingSetLib(number, characters):
     """Create a list of characters that the user has to type as training"""
     generated_charTrainingSetLib = {}
     for i in range(number):
-        generated_charTrainingSetLib.update({i: {"character": random.choice(characters), "userinput": ""}})
+        generated_charTrainingSetLib.update({i: {"character": random.choice(characters), "userinput": "", "duration": ""}})
     return generated_charTrainingSetLib
+
+def colorizedTypedString(dictTrainingSet, iteration):
+    """Created a colorized string with all typed charaters"""
+    import terminal
+
+    for x, i in dictTrainingSet.items():
+        if x == (iteration):
+            break
+        if i["userinput"] == "correct":
+            print(terminal.green(i["character"]), end='')
+        if i["userinput"] == "incorrect":
+            print(terminal.red(i["character"]), end='')
+        if i["userinput"] == "second_try":
+            print(terminal.blue(i["character"]), end='')
+        else:
+            print('', end='')
+    print("", end="\n")
+        
+
