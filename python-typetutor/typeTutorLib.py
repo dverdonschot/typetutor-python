@@ -50,12 +50,12 @@ def traincharacters(characters: str = characterset, numberOffLetters: int = 100)
                     i.update({"userinput": "second_try","duration": str(duration_char)})
                     print (terminal.green(i["character"] + " = correct on second try in " + i["duration"]))
                     functions.colorizedTypedString(training_chars, (x + 1))
-                
         except (KeyboardInterrupt, SystemExit):
             os.system('stty sane')
             print('stopping.')
 
 
+    print(functions.summaryResults(training_chars))
 
 @app.command()
 def words(name: str):

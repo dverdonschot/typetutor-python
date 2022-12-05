@@ -58,5 +58,33 @@ def colorizedTypedString(dictTrainingSet, iteration):
         else:
             print('', end='')
     print("", end="\n")
-        
 
+def summaryResults(dictTrainingSet):
+  import datetime
+  import statistics
+  correct = 0
+  second_try = 0
+  incorrect = 0
+  average_deciseconds_list = []
+  for x, i in dictTrainingSet.items():
+    if i["userinput"] == 'correct':
+      correct = +1
+    if i["userinput"] == 'second_try':
+      second_try = +1
+    if i["userinput"] == 'incorrect':
+      incorrect = +1
+
+    timestamp_obj = datetime.datetime.strptime(i["duration"], '%H:%M:%S.%f')
+    duration_decisecond = int((timestamp_obj.second * 1000000 + timestamp_obj.microsecond) / 10000)
+    average_deciseconds_list.append(duration_decisecond)
+
+  average_duration = int(statistics.mean(average_deciseconds_list)) / 100
+
+  return_var = """##################################################
+  Typed First Time Right: {correct}
+  Needed a Second Try: {second_try}
+  Failed to type correct: {incorrect}
+  Average Duration per Typed Character: {average_duration})
+  """.format(correct=correct, second_try=second_try, incorrect=incorrect, average_duration=average_duration)
+
+  return return_var
