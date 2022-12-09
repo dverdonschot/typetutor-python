@@ -1,54 +1,47 @@
-#!/usr/bin/python3
+#!/usr/bin/python
 
 import typer
 import random
 import sys,tty,os,termios
 
+
 app = typer.Typer()
 
-characterset = "1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^][)(}{~`|=.*+'"
+characterset = "1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^][)(}{~`|=.*+'\"-_"
+letterset = "1234567890"
+calcset = "1234567890/+*-%^$#@!()][=.~"
+specialset = "!@#$%^][)(}{~`|=.*+'\"-_"
 
 @app.command()
-def traincharacters(characters: str = characterset, numberOffLetters: int = 100):
+def randomcharacters(characters: str = characterset, numberOffLetters: int = 100):
     """
-    Type the characters you want to train.
-    You will get the characters randomized.
+    Type the letters you want to train
     """
-    import functions
-    import terminal
+    import randomFunctions
+    randomFunctions.randomcharacters(characters, numberOffLetters=numberOffLetters)
 
-    unique_characters = set(characters)
-    list_chars = list(unique_characters)
+def randomspecial(characters: str = specialset, numberOffLetters: int = 100):
+    """
+    Type the letters you want to train
+    """
+    import randomFunctions
+    randomFunctions.randomcharacters(characters, numberOffLetters=numberOffLetters)
 
-    training_chars = functions.charTrainingSet(numberOffLetters, list_chars)
-    number_char = 0
-    for i in training_chars:
-        print(terminal.magenta(i))
+@app.command()
+def randomletters(characters: str = letterset, numberOffLetters: int = 50):
+    """
+    Type the letters you want to train
+    """
+    import randomFunctions
+    randomFunctions.randomcharacters(characters, numberOffLetters=numberOffLetters)
 
-        try:
-            #while True:
-                k = functions.getkey()
-                if k == 'esc':
-                    print(terminal.yellow('quiting'))
-                    quit()
-                if k == i:
-                    number_char = number_char + 1
-                    print (terminal.green(i + "= correct"))
-                    print(training_chars[:number_char])
-                elif k != i:
-                    number_char = number_char + 1
-                    print(terminal.red(k + " = wrong should be " + i))
-                    k = functions.getkey()
-                    if k != i:
-                        print(terminal.red(k + " = still a fail should be " + i))
-                    if k == i:
-                        print (terminal.green(i + " = correct on second try"))
-                        print(training_chars[:number_char])
-                    
-        except (KeyboardInterrupt, SystemExit):
-            os.system('stty sane')
-            print('stopping.')
-
+@app.command()
+def randomcalc(characters: str = calcset, numberOffLetters: int = 50):
+    """
+    Type the letters you want to train
+    """
+    import randomFunctions
+    randomFunctions.randomcharacters(characters, numberOffLetters=100)
 
 
 @app.command()
