@@ -9,20 +9,20 @@ app = typer.Typer()
 
 characterset = "1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^][)(}{~`|=.*+'\"-_"
 letterset = "1234567890"
-calcset = "1234567890/+*-%^$#@!()][=.~"
+numpadset = "1234567890/+*-."
 specialset = "!@#$%^][)(}{~`|=.*+'\"-_"
 
 @app.command()
 def randomcharacters(characters: str = characterset, numberOffLetters: int = 100):
     """
-    Type the letters you want to train
+    Train typing randomized characters, Letter, Numbers, special characters
     """
     import randomFunctions
     randomFunctions.randomcharacters(characters, numberOffLetters=numberOffLetters)
 
 def randomspecial(characters: str = specialset, numberOffLetters: int = 100):
     """
-    Type the letters you want to train
+    Train typing Special Characters in a randomized order
     """
     import randomFunctions
     randomFunctions.randomcharacters(characters, numberOffLetters=numberOffLetters)
@@ -30,18 +30,18 @@ def randomspecial(characters: str = specialset, numberOffLetters: int = 100):
 @app.command()
 def randomletters(characters: str = letterset, numberOffLetters: int = 50):
     """
-    Type the letters you want to train
+    Train typing Letters in a randomized order
     """
     import randomFunctions
     randomFunctions.randomcharacters(characters, numberOffLetters=numberOffLetters)
 
 @app.command()
-def randomcalc(characters: str = calcset, numberOffLetters: int = 50):
+def randomnumpad(characters: str = numpadset, numberOffLetters: int = 50):
     """
-    Type the letters you want to train
+    Train typing the numpad keys
     """
     import randomFunctions
-    randomFunctions.randomcharacters(characters, numberOffLetters=100)
+    randomFunctions.randomcharacters(characters, numberOffLetters=numberOffLetters)
 
 
 @app.command()

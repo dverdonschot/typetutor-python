@@ -35,3 +35,4 @@ build/**/*
 yarn.lock
 Footer
 alpha-prj/*
+python-typetutor/__pycache__/*
