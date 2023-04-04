@@ -133,5 +133,5 @@ def randomcharacters(characters: str, numberOffLetters: int):
             os.system('stty sane')
             print('stopping.')
 
-    print(functions.summaryResults(training_chars))
+    print(randomFunctions.summaryResults(training_chars))
 
