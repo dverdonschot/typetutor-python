@@ -28,13 +28,6 @@ def getkey():
     finally:
         termios.tcsetattr(sys.stdin, termios.TCSADRAIN, old_settings)
 
-def charTrainingSet(number, characters):
-    """Create a list of characters that the user has to type as training"""
-    generated_charTrainingSet = []
-    for i in range(number):
-        generated_charTrainingSet.append(random.choice(characters))
-    return generated_charTrainingSet
-
 def charTrainingSetLib(number, characters):
     """Create a list of characters that the user has to type as training"""
     generated_charTrainingSetLib = {}
