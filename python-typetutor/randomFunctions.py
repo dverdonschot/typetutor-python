@@ -61,7 +61,9 @@ def colorizedTypedString(dictTrainingSet, iteration):
 
 def summaryResults(dictTrainingSet):
   import datetime
+  import re
   import statistics
+  pattern_timestamp = '([0-9]{1}:[0-9]{2}:[0-9]{2}.[0-9]{6})'
   correct = 0
   second_try = 0
   incorrect = 0
@@ -74,9 +76,10 @@ def summaryResults(dictTrainingSet):
     if i["userinput"] == 'incorrect':
       incorrect = +1
 
-    timestamp_obj = datetime.datetime.strptime(i["duration"], '%H:%M:%S.%f')
-    duration_decisecond = int((timestamp_obj.second * 1000000 + timestamp_obj.microsecond) / 10000)
-    average_deciseconds_list.append(duration_decisecond)
+    if re.match(pattern_timestamp, i["duration"]):
+        timestamp_obj = datetime.datetime.strptime(i["duration"], '%H:%M:%S.%f')
+        duration_decisecond = int((timestamp_obj.second * 1000000 + timestamp_obj.microsecond) / 10000)
+        average_deciseconds_list.append(duration_decisecond)
 
   average_duration = int(statistics.mean(average_deciseconds_list)) / 100
 

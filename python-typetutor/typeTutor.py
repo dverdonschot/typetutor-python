@@ -12,6 +12,13 @@ letterset = "1234567890"
 numpadset = "1234567890/+*-."
 specialset = "!@#$%^][)(}{~`|=.*+'\"-_"
 
+@app.callback()
+def main():
+    """
+    Welcome to TypeTutor, Start Improving Your Typeskills Today!
+    """
+    print("Welcome to TypeTutor, Start Improving Your Typeskills Today!")
+
 @app.command()
 def randomcharacters(characters: str = characterset, numberOffLetters: int = 100):
     """
@@ -20,6 +27,7 @@ def randomcharacters(characters: str = characterset, numberOffLetters: int = 100
     import randomFunctions
     randomFunctions.randomcharacters(characters, numberOffLetters=numberOffLetters)
 
+@app.command()
 def randomspecial(characters: str = specialset, numberOffLetters: int = 100):
     """
     Train typing Special Characters in a randomized order
@@ -43,7 +51,6 @@ def randomnumpad(characters: str = numpadset, numberOffLetters: int = 50):
     import randomFunctions
     randomFunctions.randomcharacters(characters, numberOffLetters=numberOffLetters)
 
-
 @app.command()
 def words(name: str):
     """
@@ -57,6 +64,7 @@ def quotes(name: str):
     Type random quotes
     """
     print(f"Bye {name}!")
+
 
 if __name__ == "__main__":
     app()
