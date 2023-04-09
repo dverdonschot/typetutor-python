@@ -70,11 +70,11 @@ def summaryResults(dictTrainingSet):
   average_deciseconds_list = []
   for x, i in dictTrainingSet.items():
     if i["userinput"] == 'correct':
-      correct = +1
+      correct += 1
     if i["userinput"] == 'second_try':
-      second_try = +1
+      second_try += 1
     if i["userinput"] == 'incorrect':
-      incorrect = +1
+      incorrect += 1
 
     if re.match(pattern_timestamp, i["duration"]):
         timestamp_obj = datetime.datetime.strptime(i["duration"], '%H:%M:%S.%f')
