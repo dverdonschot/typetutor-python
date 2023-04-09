@@ -1,16 +1,26 @@
 # TypeTutor
 
-During my journey to learn touch typing I never found a CLI program that lived up to all my wants.
-So learning Typescript with NodeJS by making a touch typing CLI program seemed like a obvious choice.
+Typetutor is a python commandline (cli) program to help you improve your touch typing skills.
+It allows you to train keys by typing random character selections, like letters, special or all characters.
 
-Not sure where this is going to lead, the goal for now is to learn Typescript and have fun doing it.
+## customize the typing challenges
+Using the CLI options you can tune your settings and select characters or the amount of characters you have to type.
+
+```
+python3 typeTutor.py randomletters --characters 12345678 --numberoffletters 100
+```
+
+## Roadmap
+Next feature to implement is typing quotes, followed by typing code.
+
+
 
 # Sources:
 
 Initial setup for a CLI program
 https://medium.com/geekculture/building-a-node-js-cli-with-typescript-packaged-and-distributed-via-homebrew-15ba2fadcb81
 
-## Touch Typing lessons web based
+## Touch Typing lessons web based (comparison material)
 
 ### TypingClub
 Detailed training, very suiteable for kids, has good assignements and texts:

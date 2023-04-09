@@ -95,7 +95,7 @@ def summaryResults(dictTrainingSet):
 
   return return_var
 
-def randomcharacters(characters: str, numberOffLetters: int):
+def randomcharacters(characters: str, numberOffLetters: int, secondtry: bool = False):
     """
     Type the characters you want to train.
     You will get the characters randomized.
@@ -125,16 +125,20 @@ def randomcharacters(characters: str, numberOffLetters: int):
                 randomFunctions.colorizedTypedString(training_chars, (x + 1))
             elif k != i["character"]:
                 print(terminal.red(k + " = wrong should be " + i["character"]))
-                k = randomFunctions.getkey()
-                if k != i["character"]:
-                    i.update({"userinput": "incorrect","duration": "na"})
-                    print(terminal.red(k + " = still a fail should be " + i["character"]))
+                if secondtry == False:
+                    i.update({"userinput": "incorrect", "duration": "na"})
                     randomFunctions.colorizedTypedString(training_chars, (x + 1))
-                if k == i["character"]:
-                    duration_char = datetime.datetime.now() - start_char
-                    i.update({"userinput": "second_try","duration": str(duration_char)})
-                    print (terminal.green(i["character"] + " = correct on second try in " + i["duration"]))
-                    randomFunctions.colorizedTypedString(training_chars, (x + 1))
+                elif secondtry == True:
+                    k = randomFunctions.getkey()
+                    if k != i["character"]:
+                        i.update({"userinput": "incorrect","duration": "na"})
+                        print(terminal.red(k + " = still a fail should be " + i["character"]))
+                        randomFunctions.colorizedTypedString(training_chars, (x + 1))
+                    if k == i["character"]:
+                        duration_char = datetime.datetime.now() - start_char
+                        i.update({"userinput": "second_try","duration": str(duration_char)})
+                        print (terminal.green(i["character"] + " = correct on second try in " + i["duration"]))
+                        randomFunctions.colorizedTypedString(training_chars, (x + 1))
         except (KeyboardInterrupt, SystemExit):
             os.system('stty sane')
             print('stopping.')
