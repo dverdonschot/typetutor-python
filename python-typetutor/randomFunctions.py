@@ -29,10 +29,20 @@ def getkey():
         termios.tcsetattr(sys.stdin, termios.TCSADRAIN, old_settings)
 
 def charTrainingSetLib(number, characters):
-    """Create a list of characters that the user has to type as training"""
+    """Create a list of random characters that the user has to type as training"""
     generated_charTrainingSetLib = {}
     for i in range(number):
         generated_charTrainingSetLib.update({i: {"character": random.choice(characters), "userinput": "", "duration": ""}})
+    return generated_charTrainingSetLib
+
+def textTrainingSetLib(text):
+    """Create a list of characters from a text like a quote, that the user can then type as training"""
+    generated_charTrainingSetLib = {}
+    item_number = 0
+    for i in text:
+        item_number += 1
+        print(i)
+        generated_charTrainingSetLib.update({item_number: {"character": i, "userinput": "", "duration": ""}})
     return generated_charTrainingSetLib
 
 def colorizedTypedString(dictTrainingSet, iteration):
