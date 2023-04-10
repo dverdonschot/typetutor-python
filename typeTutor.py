@@ -4,7 +4,7 @@ from re import S
 import typer
 import random
 import sys,tty,os,termios
-
+import typeTutorFunctions
 
 app = typer.Typer()
 
@@ -25,32 +25,31 @@ def randomcharacters(characters: str = characterset, numberOffLetters: int = 100
     """
     Train typing randomized characters, Letter, Numbers, special characters
     """
-    import randomFunctions
-    randomFunctions.randomcharacters(characters, numberOffLetters=numberOffLetters, secondtry=secondtry)
+    typeTutorFunctions.randomTyper(characters, numberOffLetters=numberOffLetters, secondtry=secondtry)
 
 @app.command()
 def randomspecial(characters: str = specialset, numberOffLetters: int = 100, secondtry: bool = True):
     """
     Train typing Special Characters in a randomized order
     """
-    import randomFunctions
-    randomFunctions.randomcharacters(characters, numberOffLetters=numberOffLetters, secondtry=secondtry)
+    import typeTutorFunctions
+    typeTutorFunctions.randomTyper(characters, numberOffLetters=numberOffLetters, secondtry=secondtry)
 
 @app.command()
 def randomletters(characters: str = letterset, numberOffLetters: int = 50, secondtry: bool = True):
     """
     Train typing Letters in a randomized order
     """
-    import randomFunctions
-    randomFunctions.randomcharacters(characters, numberOffLetters=numberOffLetters, secondtry=secondtry)
+    import typeTutorFunctions
+    typeTutorFunctions.randomTyper(characters, numberOffLetters=numberOffLetters, secondtry=secondtry)
 
 @app.command()
 def randomnumpad(characters: str = numpadset, numberOffLetters: int = 50, secondtry: bool = True):
     """
     Train typing the numpad keys
     """
-    import randomFunctions
-    randomFunctions.randomcharacters(characters, numberOffLetters=numberOffLetters, secondtry=secondtry)
+    import typeTutorFunctions
+    typeTutorFunctions.randomTyper(characters, numberOffLetters=numberOffLetters, secondtry=secondtry)
 
 @app.command()
 def words(name: str):

@@ -103,26 +103,26 @@ def summaryResults(dictTrainingSet, secondtry: bool = False):
 
   return return_result
 
-def randomcharacters(characters: str, numberOffLetters: int, secondtry: bool = False):
+def randomTyper(characters: str, numberOffLetters: int, secondtry: bool = False):
     """
     Type the characters you want to train.
     You will get the characters randomized.
     """
-    import randomFunctions
+    import typeTutorFunctions
     import terminal
     import datetime
 
     unique_characters = set(characters)
     list_chars = list(unique_characters)
 
-    training_chars = randomFunctions.charTrainingSetLib(numberOffLetters, list_chars)
+    training_chars = typeTutorFunctions.charTrainingSetLib(numberOffLetters, list_chars)
 
     for x, i in training_chars.items():
         print(terminal.magenta(i["character"]))
         start_char = datetime.datetime.now()
 
         try:
-            k = randomFunctions.getkey()
+            k = typeTutorFunctions.getkey()
             if k == 'esc':
                 print(terminal.yellow('quiting'))
                 quit()
@@ -130,26 +130,26 @@ def randomcharacters(characters: str, numberOffLetters: int, secondtry: bool = F
                 duration_char = datetime.datetime.now() - start_char
                 i.update({"userinput": "correct","duration": str(duration_char)})
                 print (terminal.green(i["character"] + " = correct in " + i["duration"]))
-                randomFunctions.colorizedTypedString(training_chars, (x + 1))
+                typeTutorFunctions.colorizedTypedString(training_chars, (x + 1))
             elif k != i["character"]:
                 print(terminal.red(k + " = wrong should be " + i["character"]))
                 if secondtry == False:
                     i.update({"userinput": "incorrect", "duration": "na"})
-                    randomFunctions.colorizedTypedString(training_chars, (x + 1))
+                    typeTutorFunctions.colorizedTypedString(training_chars, (x + 1))
                 elif secondtry == True:
-                    k = randomFunctions.getkey()
+                    k = typeTutorFunctions.getkey()
                     if k != i["character"]:
                         i.update({"userinput": "incorrect","duration": "na"})
                         print(terminal.red(k + " = still a fail should be " + i["character"]))
-                        randomFunctions.colorizedTypedString(training_chars, (x + 1))
+                        typeTutorFunctions.colorizedTypedString(training_chars, (x + 1))
                     if k == i["character"]:
                         duration_char = datetime.datetime.now() - start_char
                         i.update({"userinput": "second_try","duration": str(duration_char)})
                         print (terminal.green(i["character"] + " = correct on second try in " + i["duration"]))
-                        randomFunctions.colorizedTypedString(training_chars, (x + 1))
+                        typeTutorFunctions.colorizedTypedString(training_chars, (x + 1))
         except (KeyboardInterrupt, SystemExit):
             os.system('stty sane')
             print('stopping.')
 
-    print(randomFunctions.summaryResults(training_chars, secondtry))
+    print(typeTutorFunctions.summaryResults(training_chars, secondtry))
 
