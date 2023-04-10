@@ -21,16 +21,16 @@ def main():
     print("Welcome to TypeTutor, Start Improving Your Typeskills Today!")
 
 @app.command()
-def randomcharacters(characters: str = characterset, numberOffLetters: int = 100, secondtry: bool = True):
+def random(characters: str = characterset, numberOffLetters: int = 100, secondtry: bool = True):
     """
-    Train typing randomized characters, Letter, Numbers, special characters
+    Train typing randomized characters from all over your keyboard, Letter, Numbers, special characters
     """
     typeTutorFunctions.randomTyper(characters, numberOffLetters=numberOffLetters, secondtry=secondtry)
 
 @app.command()
 def randomspecial(characters: str = specialset, numberOffLetters: int = 100, secondtry: bool = True):
     """
-    Train typing Special Characters in a randomized order
+    Train typing Special Characters like ~[(){|@!$#^ in a randomized order
     """
     import typeTutorFunctions
     typeTutorFunctions.randomTyper(characters, numberOffLetters=numberOffLetters, secondtry=secondtry)
@@ -38,7 +38,7 @@ def randomspecial(characters: str = specialset, numberOffLetters: int = 100, sec
 @app.command()
 def randomletters(characters: str = letterset, numberOffLetters: int = 50, secondtry: bool = True):
     """
-    Train typing Letters in a randomized order
+    Train typing Letters 1234567890 in a randomized order
     """
     import typeTutorFunctions
     typeTutorFunctions.randomTyper(characters, numberOffLetters=numberOffLetters, secondtry=secondtry)
@@ -46,14 +46,14 @@ def randomletters(characters: str = letterset, numberOffLetters: int = 50, secon
 @app.command()
 def randomnumpad(characters: str = numpadset, numberOffLetters: int = 50, secondtry: bool = True):
     """
-    Train typing the numpad keys
+    Train typing the numpad keys including \+-*
     """
     import typeTutorFunctions
     typeTutorFunctions.randomTyper(characters, numberOffLetters=numberOffLetters, secondtry=secondtry)
 
 @app.command()
 def words(name: str):
-    """
+    """k
     Type random words sourced from the Linux words file.
     """
     print(f"Bye {name}!")
