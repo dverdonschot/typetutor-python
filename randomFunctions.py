@@ -62,7 +62,7 @@ def colorizedTypedString(dictTrainingSet, iteration):
             print('', end='')
     print("", end="\n")
 
-def summaryResults(dictTrainingSet):
+def summaryResults(dictTrainingSet, secondtry: bool = False):
   import datetime
   import re
   import statistics
@@ -74,10 +74,10 @@ def summaryResults(dictTrainingSet):
   for x, i in dictTrainingSet.items():
     if i["userinput"] == 'correct':
       correct += 1
-    if i["userinput"] == 'second_try':
-      second_try += 1
     if i["userinput"] == 'incorrect':
       incorrect += 1
+    if secondtry == True and i["userinput"] == 'second_try':
+      second_try += 1
 
     if re.match(pattern_timestamp, i["duration"]):
         timestamp_obj = datetime.datetime.strptime(i["duration"], '%H:%M:%S.%f')
@@ -88,12 +88,20 @@ def summaryResults(dictTrainingSet):
 
   return_var = """##################################################
   Typed First Time Right: {correct}
+  Failed to type correct: {incorrect}
+  Average Duration per Typed Character: {average_duration}
+  """.format(correct=correct, incorrect=incorrect, average_duration=average_duration)
+
+  return_var_secondtry = """##################################################
+  Typed First Time Right: {correct}
   Needed a Second Try: {second_try}
   Failed to type correct: {incorrect}
   Average Duration per Typed Character: {average_duration}
   """.format(correct=correct, second_try=second_try, incorrect=incorrect, average_duration=average_duration)
 
-  return return_var
+  return_result = return_var if secondtry == False else return_var_secondtry
+
+  return return_result
 
 def randomcharacters(characters: str, numberOffLetters: int, secondtry: bool = False):
     """
@@ -143,5 +151,5 @@ def randomcharacters(characters: str, numberOffLetters: int, secondtry: bool = F
             os.system('stty sane')
             print('stopping.')
 
-    print(randomFunctions.summaryResults(training_chars))
+    print(randomFunctions.summaryResults(training_chars, secondtry))
 
