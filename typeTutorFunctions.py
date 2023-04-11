@@ -45,13 +45,16 @@ def textTrainingSetLib(text):
         generated_charTrainingSetLib.update({item_number: {"character": i, "userinput": "", "duration": ""}})
     return generated_charTrainingSetLib
 
-def colorizedTypedString(dictTrainingSet, iteration):
+def colorizedTypedString(dictTrainingSet: dict, iteration: int, showAll: bool = False ):
     """Created a colorized string with all typed charaters"""
     import terminal
 
     for x, i in dictTrainingSet.items():
-        if x == (iteration):
-            break
+        if x >= (iteration):
+            if showAll == False:
+                break
+            if showAll == True:
+                print(terminal.white(i["character"]), end='')
         if i["userinput"] == "correct":
             print(terminal.green(i["character"]), end='')
         if i["userinput"] == "incorrect":
@@ -162,11 +165,20 @@ def textTyper(text: dict, secondtry: bool = False):
     import datetime
 
     length_text = len(text)
-    randomquote = random.randint(0, length_text)
+    randomquote = random.randint(0, (length_text - 1))
+    print(text[randomquote]['quote'])
+    print(text[randomquote]['author'])
 
-    for x, i in text.items():
+
+    characterlib = textTrainingSetLib(text[randomquote]['quote'])
+    print(characterlib)
+
+    typeTutorFunctions.colorizedTypedString(characterlib, (0), showAll=True)
+
+    for x, i in characterlib.items():
         print(terminal.magenta(i["character"]))
         start_char = datetime.datetime.now()
+
 
         try:
             k = typeTutorFunctions.getkey()
@@ -177,27 +189,32 @@ def textTyper(text: dict, secondtry: bool = False):
                 duration_char = datetime.datetime.now() - start_char
                 i.update({"userinput": "correct","duration": str(duration_char)})
                 print (terminal.green(i["character"] + " = correct in " + i["duration"]))
-                typeTutorFunctions.colorizedTypedString(training_chars, (x + 1))
+                typeTutorFunctions.colorizedTypedString(characterlib, (x + 1), showAll=True)
+            if k == 'space' and i["character"] == " ":
+                duration_char = datetime.datetime.now() - start_char
+                i.update({"userinput": "correct","duration": str(duration_char)})
+                print (terminal.green(i["character"] + " = correct in " + i["duration"]))
+                typeTutorFunctions.colorizedTypedString(characterlib, (x + 1), showAll=True)
             elif k != i["character"]:
                 print(terminal.red(k + " = wrong should be " + i["character"]))
                 if secondtry == False:
                     i.update({"userinput": "incorrect", "duration": "na"})
-                    typeTutorFunctions.colorizedTypedString(training_chars, (x + 1))
+                    typeTutorFunctions.colorizedTypedString(characterlib, (x + 1), showAll=True)
                 elif secondtry == True:
                     k = typeTutorFunctions.getkey()
                     if k != i["character"]:
                         i.update({"userinput": "incorrect","duration": "na"})
                         print(terminal.red(k + " = still a fail should be " + i["character"]))
-                        typeTutorFunctions.colorizedTypedString(training_chars, (x + 1))
+                        typeTutorFunctions.colorizedTypedString(characterlib, (x + 1), showAll=True)
                     if k == i["character"]:
                         duration_char = datetime.datetime.now() - start_char
                         i.update({"userinput": "second_try","duration": str(duration_char)})
                         print (terminal.green(i["character"] + " = correct on second try in " + i["duration"]))
-                        typeTutorFunctions.colorizedTypedString(training_chars, (x + 1))
+                        typeTutorFunctions.colorizedTypedString(characterlib, (x + 1), showAll=True)
         except (KeyboardInterrupt, SystemExit):
             os.system('stty sane')
             print('stopping.')
 
-    print(typeTutorFunctions.summaryResults(training_chars, secondtry))
+    print(typeTutorFunctions.summaryResults(characterlib, secondtry))
 
 

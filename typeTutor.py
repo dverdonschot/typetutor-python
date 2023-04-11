@@ -2,7 +2,6 @@
 
 from re import S
 import typer
-import random
 import sys,tty,os,termios
 import typeTutorFunctions
 import json
@@ -60,12 +59,12 @@ def words(name: str):
     print(f"Bye {name}!")
 
 @app.command()
-def quotes(secondtry: bool = True):
+def quotes(secondtry: bool = False):
     """
     Type random quotes
     """
     quotesdict = json.load(open("quotes.json"))
-    typeTutorFunctions.textTyper(quotesdict, secondtry)
+    typeTutorFunctions.textTyper(quotesdict, secondtry=secondtry)
 
 
 if __name__ == "__main__":
