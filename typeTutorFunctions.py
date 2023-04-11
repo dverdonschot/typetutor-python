@@ -153,3 +153,51 @@ def randomTyper(characters: str, numberOffLetters: int, secondtry: bool = False)
 
     print(typeTutorFunctions.summaryResults(training_chars, secondtry))
 
+def textTyper(text: dict, secondtry: bool = False):
+    """
+    Type text from like quotes from a quotes file
+    """
+    import typeTutorFunctions
+    import terminal
+    import datetime
+
+    length_text = len(text)
+    randomquote = random.randint(0, length_text)
+
+    for x, i in text.items():
+        print(terminal.magenta(i["character"]))
+        start_char = datetime.datetime.now()
+
+        try:
+            k = typeTutorFunctions.getkey()
+            if k == 'esc':
+                print(terminal.yellow('quiting'))
+                quit()
+            if k == i["character"]:
+                duration_char = datetime.datetime.now() - start_char
+                i.update({"userinput": "correct","duration": str(duration_char)})
+                print (terminal.green(i["character"] + " = correct in " + i["duration"]))
+                typeTutorFunctions.colorizedTypedString(training_chars, (x + 1))
+            elif k != i["character"]:
+                print(terminal.red(k + " = wrong should be " + i["character"]))
+                if secondtry == False:
+                    i.update({"userinput": "incorrect", "duration": "na"})
+                    typeTutorFunctions.colorizedTypedString(training_chars, (x + 1))
+                elif secondtry == True:
+                    k = typeTutorFunctions.getkey()
+                    if k != i["character"]:
+                        i.update({"userinput": "incorrect","duration": "na"})
+                        print(terminal.red(k + " = still a fail should be " + i["character"]))
+                        typeTutorFunctions.colorizedTypedString(training_chars, (x + 1))
+                    if k == i["character"]:
+                        duration_char = datetime.datetime.now() - start_char
+                        i.update({"userinput": "second_try","duration": str(duration_char)})
+                        print (terminal.green(i["character"] + " = correct on second try in " + i["duration"]))
+                        typeTutorFunctions.colorizedTypedString(training_chars, (x + 1))
+        except (KeyboardInterrupt, SystemExit):
+            os.system('stty sane')
+            print('stopping.')
+
+    print(typeTutorFunctions.summaryResults(training_chars, secondtry))
+
+

@@ -5,6 +5,7 @@ import typer
 import random
 import sys,tty,os,termios
 import typeTutorFunctions
+import json
 
 app = typer.Typer()
 
@@ -59,11 +60,12 @@ def words(name: str):
     print(f"Bye {name}!")
 
 @app.command()
-def quotes(name: str):
+def quotes(secondtry: bool = True):
     """
     Type random quotes
     """
-    print(f"Bye {name}!")
+    quotesdict = json.load(open("quotes.json"))
+    typeTutorFunctions.textTyper(quotesdict, secondtry)
 
 
 if __name__ == "__main__":
